@@ -236,7 +236,7 @@ It is worth noting that you should be careful the operations you perform on the 
 * Justin Smestad -- http://github.com/jsmestad
 * Jordan West -- http://github.com/jrwest
 
-Additional contributors can be viewed at: https://github.com/benmyles/mongomatic/contributors
+Additional contributors can be viewed at: https://github.com/mongomachine/mongomatic/contributors
 
 == Copyright
 
