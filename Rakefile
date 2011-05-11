@@ -7,10 +7,9 @@ begin
     gem.name = "mongomatic"
     gem.summary = %Q{Mongomatic is a modular Ruby object mapper for Mongo}
     gem.description = %Q{Mongomatic is a modular Ruby object mapper for Mongo}
-    gem.email = "ben.myles@gmail.com"
-    gem.homepage = "http://mongomatic.com/"
+    gem.email = ["ben.myles@gmail.com", "justin.smestad@gmail.com"]
+    gem.homepage = "http://github.com/mongomachine/mongomatic"
     gem.authors = ["Ben Myles", "Justin Smestad"]
-    gem.license = "MIT"
   end
   Jeweler::RubygemsDotOrgTasks.new
 rescue LoadError
