@@ -196,43 +196,15 @@ module Mongomatic
       end
     end
 
-    # If the document is new then an update (upsert) operation will be performed and any existing
-    # document with that _id is overwritten.  Otherwise an insert operation is performed.
-    #
-    # Will return false if the document is invalid. Returns the generated BSON::ObjectId
-    # for the document. Will silently fail if MongoDB is unable to insert the
-    # document, use insert! or send in {:safe => true} if you want a Mongo::OperationError.
-    # If you want to raise the following errors also, pass in {:raise => true}
-    #   * Raises Mongomatic::Exceptions::DocumentWasRemoved if document was removed
-    #   * Raises Mongomatic::Exceptions::DocumentNotValid if there are validation errors
+    # If the document is new then an insert is performed, otherwise, an update is peformed.
     def save(opts={})
-      if opts[:raise] = true
-        raise Mongomatic::Exceptions::DocumentWasRemoved if removed?
-        raise Mongomatic::Exceptions::DocumentNotValid unless valid?
-      else
-        return false unless valid?
-      end
-
-      new? ? do_callback(:before_insert) : do_callback(:before_update)
-      do_callback(:before_insert_or_update)
-      if ret = self.class.collection.save(@doc,opts)
-        @doc["_id"] = @doc.delete(:_id) if @doc[:_id]
-      end
-      new? ? do_callback(:after_insert) : do_callback(:after_update)
-      do_callback(:after_insert_or_update)
-      self.is_new = false if ret
-      ret
+      (new?) ? insert(opts) : update(opts)
     end
 
     # Calls save(...) with {:safe => true} passed in as an option.
-    #   * Raises Mongo::OperationError if there was a DB error on inserting
-    # If you want to raise the following errors also, pass in {:raise => true}
-    #   * Raises Mongomatic::Exceptions::DocumentWasRemoved if document was removed
-    #   * Raises Mongomatic::Exceptions::DocumentNotValid if there are validation errors
     def save!(opts={})
       save(opts.merge(:safe => true))
     end
-
 
     # Insert the document into the database. Will return false if the document has
     # already been inserted or is invalid. Returns the generated BSON::ObjectId
