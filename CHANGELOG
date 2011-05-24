@@ -1,5 +1,6 @@
-= 0.9.pre
+= 0.9.0.pre
  * Add Mongomatic::Base#find_or_initialize method (jsmestad)
+ * Mongomatic::Base#save methods now delegate to either #insert or #update (jrwest & dusty)
 
  Internal:
  * Updated development dependencies and Jeweler definitions (jsmestad)
