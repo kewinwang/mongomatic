@@ -2,8 +2,8 @@ source "http://rubygems.org"
 # Add dependencies required to use your gem here.
 # Example:
 gem "activesupport", ">= 3.0.0"
-gem "mongo", ">= 1.2.4"
-gem "bson", ">= 1.2.4"
+gem "mongo", ">= 1.3.1"
+gem "bson", ">= 1.3.1"
 gem "i18n", ">= 0.5.0"
 
 # Add dependencies to develop your gem here.
