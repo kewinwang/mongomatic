@@ -2,10 +2,11 @@
 
  New Features:
  * Base#find_or_initialize method (completed)
- * Add railtie for loading variables from a YAML file
+ * Add railtie for loading variables from a YAML file (see http://github.com/jrwest/mongomatic-rails3)
  * Document hash should have sub-select functionality
  * Mongomatic#Cursor should support inject and other enumerable functions
  * Capistrano/Deployment recipe that calls create_index
+ * Mongomatic::Sanitize module which will bi-directionally convert invalid MongoDB key names
 
  Refactor:
  * Mongomatic::Base should be a module instead of inheritence
