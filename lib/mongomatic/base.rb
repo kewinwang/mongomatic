@@ -201,6 +201,16 @@ module Mongomatic
       end
     end
 
+    # If the document is new then an insert is performed, otherwise, an update is peformed.
+    def save(opts={})
+      (new?) ? insert(opts) : update(opts)
+    end
+
+    # Calls save(...) with {:safe => true} passed in as an option.
+    def save!(opts={})
+      save(opts.merge(:safe => true))
+    end
+
     # Insert the document into the database. Will return false if the document has
     # already been inserted or is invalid. Returns the generated BSON::ObjectId
     # for the new document. Will silently fail if MongoDB is unable to insert the
@@ -228,7 +238,7 @@ module Mongomatic
       ret
     end
 
-    # Calls insert(...) with {:safe => true} passed in as an option. 
+    # Calls insert(...) with {:safe => true} passed in as an option.
     #   * Raises Mongo::OperationError if there was a DB error on inserting
     # If you want to raise the following errors also, pass in {:raise => true}
     #   * Raises Mongomatic::Exceptions::DocumentNotNew if document is not new
@@ -260,7 +270,7 @@ module Mongomatic
       ret
     end
 
-    # Calls update(...) with {:safe => true} passed in as an option. 
+    # Calls update(...) with {:safe => true} passed in as an option.
     #   * Raises Mongo::OperationError if there was a DB error on updating
     # If you want to raise the following errors also, pass in {:raise => true}
     #   * Raises Mongomatic::Exceptions::DocumentIsNew if document is new
@@ -319,8 +329,7 @@ module Mongomatic
     end
 
     def do_callback(meth)
-      notify(meth) if self.class.included_modules.include?(Mongomatic::Observable) # TODO entire block is smelly, doesnt belong here 
-
+      notify(meth) if self.class.included_modules.include?(Mongomatic::Observable) # TODO entire block is smelly, doesnt belong here
       return false unless respond_to?(meth, true)
       send(meth)
     end
