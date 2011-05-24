@@ -1,0 +1,14 @@
+= 0.9.0
+
+ New Features:
+ * Base#find_or_initialize method (completed)
+ * Add railtie for loading variables from a YAML file
+ * Document hash should have sub-select functionality
+ * Mongomatic#Cursor should support inject and other enumerable functions
+ * Capistrano/Deployment recipe that calls create_index
+
+ Refactor:
+ * Mongomatic::Base should be a module instead of inheritence
+
+ Deprecate:
+ * Validation DSL is very verbose
