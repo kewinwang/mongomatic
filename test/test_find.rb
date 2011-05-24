@@ -38,6 +38,20 @@ class TestFind < MiniTest::Unit::TestCase
     assert_equal found, p
   end
 
+  def test_find_or_initialize_with_query
+    Person.collection.drop
+    p1 = Person.new(:name => 'Jordan')
+    p1.insert
+    assert_equal p1, Person.find_one(:name => "Jordan")
+
+    r1 = Person.find_or_initialize({:name => 'Jordan'})
+    assert_equal r1.is_new?, false
+    assert_equal r1, p1
+
+    r2 = Person.find_or_initialize({:name => 'Jason'})
+    assert_equal r2.is_new?, true
+  end
+
   def test_limit_and_sort
     Person.collection.drop
     p = Person.new(:name => "Ben", :birth_year => 1984, :created_at => Time.now.utc, :admin => true)

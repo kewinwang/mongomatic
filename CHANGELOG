@@ -1,4 +1,5 @@
 = 0.9.pre
+ * Add Mongomatic::Base#find_or_initialize method (jsmestad)
 
  Internal:
  * Updated development dependencies and Jeweler definitions (jsmestad)
